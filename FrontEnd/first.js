@@ -1,9 +1,23 @@
+const form = document.getElementById("signin");
+form.addEventListener('submit',function (e) {
+    // console.log(form)
+    e.preventDefault()
+    const payload = new FormData(form);
+    // console.log(payload);
+    const data = Object.fromEntries(payload)
+    console.log(data);
 
-function email()
-{
-let Email_id = document.getElementById("Email_id").value;
-let Password = document.getElementById("Password").value;
+    fetch('http://localhost:3000/api/v1/auth/signin', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.log(err))
 
-console.log("Id: ",Email_id ,"\n","Pass: ", Password );
-
-}
+    // fetch('127.0.0.1:3000/').then(res => res.json()).then(data => console.log(data)).catch(err => console.log(err))
+    
+})

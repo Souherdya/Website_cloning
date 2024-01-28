@@ -2,6 +2,7 @@ require('dotenv').config();
 require('express-async-errors');
 
 const express = require('express');
+const cors = require('cors');
 const app = express()
 
 // Imports
@@ -12,10 +13,11 @@ const authRouter = require('./routes/auth');
 const errorHandler = require('./middlewares/error-handler');
 
 // Stock middlewares
-app.use([express.json(), express.urlencoded()]);
+app.use([express.json(), express.urlencoded(), cors()]);
 
 app.get('/', (req, res) => {
-    res.send("Hello world");
+    console.log("req");
+    res.json({message: "Hello world"});
 })
 
 // routes
