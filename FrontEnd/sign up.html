@@ -12,11 +12,36 @@
         <h1>Create a password to start your membership</h1>
         <p>Just a few more steps and you're done!</p>
         <p class="p2"> We hate paperwork,too.</p>
-        <form action="#" method="get">
-            <input type="text" placeholder="Email">
-            <input type="text" class="pass" id="" placeholder="Add a password">
+        <form id="signup" onsubmit="signUp" action="#">
+            <input  type="email" name="email" placeholder="Email" autocomplete="email">
+            <input name="password" type="password"class="pass" placeholder="Add a password" autocomplete="new-password">
             <button type="submit">Next</button>
         </form>
     </div>
+    <script>
+        const signUpForm = document.getElementById("signup");
+
+        signUpForm.addEventListener('submit',function (e) {
+            e.preventDefault()
+            console.log("sign up");
+            const payload = new FormData(signUpForm);
+            const data = Object.fromEntries(payload)
+            console.log(data);
+
+            fetch('http://localhost:3000/api/v1/auth/signup', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(data => {
+                window.alert(data.msg);
+            })
+            .catch(err => console.log(err))    
+        })
+
+    </script>
 </body>
 </html>

@@ -20,9 +20,32 @@
             
         </form> -->
         <h2>New to Netflix? </h2>
-        <a href="index.html">Sign up now</a>
+        <a href="sign up.html">Sign up now</a>
         </div>
     </div>
-   <script src="first.js"></script>
+   <script>
+        const signInForm = document.getElementById("signin");
+
+        signInForm.addEventListener('submit',function (e) {
+            e.preventDefault()
+            const payload = new FormData(signInForm);
+            const data = Object.fromEntries(payload)
+            console.log(data);
+        
+            fetch('http://localhost:3000/api/v1/auth/signin', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },    
+                body: JSON.stringify(data)
+            })    
+            .then(res => res.json())
+            .then(data => {
+                window.alert(data.msg);
+            })    
+            .catch(err => console.log(err))    
+        })            
+
+   </script>
 </body>
 </html>

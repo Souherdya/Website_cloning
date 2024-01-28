@@ -8,7 +8,7 @@ const signUp =async (req, res) => {
         password: req.body.password
     }
     const user = await User.create(newUser)
-    res.status(StatusCodes.CREATED).json({user: {userId: user._id, email: user.email} ,token: user.createJWT() })
+    res.status(StatusCodes.CREATED).json({msg: "User created succesfully!",user: {userId: user._id, email: user.email} ,token: user.createJWT() })
 }
 
 const signIn = async (req, res) => {
@@ -19,7 +19,7 @@ const signIn = async (req, res) => {
     if (!user) throw new UnauthenticatedError('Please provide valid email and password')
     const isValid = await user.comparePassword(password)
     if (!isValid) throw new UnauthenticatedError('Please provide valid email and password')
-    res.status(StatusCodes.OK).set({'Access-Control-Allow-Origin': '*'}).json({user: {userId: user._id, email: user.email} ,token: user.createJWT() })
+    res.status(StatusCodes.OK).set({'Access-Control-Allow-Origin': '*'}).json({msg: "Successfully signed in!",user: {userId: user._id, email: user.email} ,token: user.createJWT() })
 }
 
 

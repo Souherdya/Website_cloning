@@ -16,8 +16,8 @@ const errorHandler = require('./middlewares/error-handler');
 app.use([express.json(), express.urlencoded(), cors()]);
 
 app.get('/', (req, res) => {
-    console.log("req");
-    res.json({message: "Hello world"});
+    const tagLines = ["ja ta chele", "fasfsf sdflsafj aljfs adlfjsdfsdafja", "safjksjhfi skjfsafhi fdakshdfka"]
+    res.json({msg: "Hello world"});
 })
 
 // routes
